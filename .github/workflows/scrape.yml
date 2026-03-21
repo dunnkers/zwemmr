@@ -1,0 +1,46 @@
+name: Scrape Pool Schedules
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"  # Every Monday at 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - run: uv sync --frozen
+
+      - name: Validate LLM extraction
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: uv run pytest -m live -v
+
+      - name: Install Playwright browsers
+        run: uv run crawl4ai-setup
+
+      - name: Scrape all pools
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: uv run zwemmr-scrape --output-dir data/roosters -v
+
+      - name: Commit updated schedules
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/roosters/
+          git diff --cached --quiet || git commit -m "Update pool schedules $(date -I)"
+          git push
