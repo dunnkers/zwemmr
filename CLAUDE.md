@@ -37,7 +37,7 @@ uv run ty check                      # Type check
 ## Code conventions
 
 - All functions and methods must have type annotations
-- Use `from __future__ import annotations` in every module
 - Immutable data structures preferred (frozen dataclasses, tuples)
 - Domain terms use Dutch names where they match the source data (e.g., `baanzwemmen`)
+- Never create unnecessary `__init__.py` files — Python 3.3+ namespace packages don't need them
 - Tests use class-based grouping with descriptive method names
