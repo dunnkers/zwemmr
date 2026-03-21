@@ -41,3 +41,17 @@ uv run ty check                      # Type check
 - Domain terms use Dutch names where they match the source data (e.g., `baanzwemmen`)
 - Never create unnecessary `__init__.py` files — Python 3.3+ namespace packages don't need them
 - Tests use class-based grouping with descriptive method names
+
+## Debugging CI/CD
+
+When `gh run view` or annotations return 403 errors, use the GitHub REST API directly:
+
+```bash
+# Get run summary (workflow name, conclusion, commit)
+gh api repos/dunnkers/zwemmr/actions/runs/<run-id>
+
+# List jobs with per-step pass/fail status
+gh api repos/dunnkers/zwemmr/actions/runs/<run-id>/jobs
+```
+
+This bypasses the permissions issues that `gh run view --log-failed` can hit on private repos with limited tokens.
