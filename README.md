@@ -21,3 +21,6 @@ uv run ruff format --check
 # Type check
 uv run ty check
 ```
+
+## About
+Jeroen Overschie
