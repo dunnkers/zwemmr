@@ -58,23 +58,20 @@ export function PoolCard({ pool, onShowOnMap }: PoolCardProps) {
               50m
             </span>
           )}
-          {pool.crawlLane && (
-            <span className="rounded-full bg-cyan-50 px-2 py-0.5 text-xs font-medium text-cyan-700">
-              Crawlbaan
-            </span>
-          )}
-          {pool.reservationRequired && (
-            <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">
-              Reservering verplicht
-            </span>
-          )}
         </div>
       </div>
 
       {/* Info rows */}
       <div className="grow space-y-1.5 border-t border-gray-100 px-5 py-3 text-sm text-gray-600">
         <InfoRow label="Adres" value={pool.address} />
-        {pool.phone && <InfoRow label="Tel" value={pool.phone} />}
+        {pool.phone && (
+          <div className="flex gap-2">
+            <span className="w-20 shrink-0 font-medium text-gray-500">Tel</span>
+            <a href={`tel:${pool.phone.replace(/\s/g, "")}`} className="text-blue-600 hover:underline">
+              {pool.phone}
+            </a>
+          </div>
+        )}
         {pool.price != null && (
           <InfoRow
             label="Prijs"

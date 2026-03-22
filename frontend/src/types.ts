@@ -16,9 +16,6 @@ export interface Pool {
   price: number | null;
   priceNote: string | null;
   stadspasPrice: number | null;
-  crawlLane: boolean;
-  crawlLaneNote: string | null;
-  reservationRequired: boolean;
   features: string | null;
   website: string | null;
   scheduleUrl: string | null;
@@ -32,7 +29,6 @@ export interface Filters {
   district: string;
   has25m: boolean;
   has50m: boolean;
-  crawlLane: boolean;
 }
 
 export type View = "cards" | "map";
