@@ -34,8 +34,7 @@ export function FilterBar({
     filters.type !== "" ||
     filters.district !== "" ||
     filters.has25m ||
-    filters.has50m ||
-    filters.crawlLane;
+    filters.has50m;
 
   return (
     <div className="sticky top-0 z-20 border-b border-gray-200 bg-white/80 shadow-sm backdrop-blur-sm">
@@ -110,15 +109,6 @@ export function FilterBar({
               className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
             />
             50m
-          </label>
-          <label className="flex items-center gap-1.5 text-sm text-gray-700">
-            <input
-              type="checkbox"
-              checked={filters.crawlLane}
-              onChange={(e) => update({ crawlLane: e.target.checked })}
-              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-            />
-            Crawlbaan
           </label>
 
           {/* Reset */}

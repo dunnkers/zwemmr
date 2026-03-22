@@ -12,7 +12,6 @@ const defaultFilters: Filters = {
   district: "",
   has25m: false,
   has50m: false,
-  crawlLane: false,
 };
 
 function filterPools(pools: Pool[], filters: Filters): Pool[] {
@@ -35,7 +34,6 @@ function filterPools(pools: Pool[], filters: Filters): Pool[] {
     if (filters.district && pool.district !== filters.district) return false;
     if (filters.has25m && !pool.has25m) return false;
     if (filters.has50m && !pool.has50m) return false;
-    if (filters.crawlLane && !pool.crawlLane) return false;
     return true;
   });
 }
